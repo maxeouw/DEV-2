@@ -1,11 +1,11 @@
 from TP7 import Fraction
 
 def main():
-    # Fractionss
+    # Fractions
     f1 = Fraction(3, 4)
-    f2 = Fraction(5, 8)
-    f3 = Fraction(7, 4)  # (Improper fraction)
-    f4 = Fraction(1, 3)  # (Unit fraction)
+    f2 = Fraction(2, 8)
+    f3 = Fraction(7, 4)  # Improper fraction
+    f4 = Fraction(1, 3)  # Unit fraction
 
     print("=== Fractions Created ===")
     print(f"f1 = {f1}")
@@ -34,15 +34,15 @@ def main():
     print(f"Is f4 a unit fraction ? {f4.is_unit()}")
 
     # Comparison
-    f5 = Fraction(3, 4)  # Eqtals to f1
+    f5 = Fraction(3, 4)  # Equals to f1
     print("\n=== Comparaison ===")
     print(f"f1 == f5 ? {f1 == f5}")
     print(f"f1 == f2 ? {f1 == f2}")
 
     # Checking for adjacent fractions
     print("\n=== Adjacent Fractions ===")
-    f6 = Fraction(1, 2)  # 1/2
-    f7 = Fraction(1, 3)  # 1/3
+    f6 = Fraction(1, 2)
+    f7 = Fraction(1, 3)
     print(f"Is f6 adjacent to f7 ? {f6.is_adjacent_to(f7)}")
     print(f"Is f6 adjacent to f1 ? {f6.is_adjacent_to(f1)}")
 

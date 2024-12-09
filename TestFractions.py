@@ -34,7 +34,7 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(str(f), "4")
 
         f = Fraction(7, 4)
-        self.assertEqual(f.as_mixed_number(), "1 3/4")
+        self.assertEqual(f.as_mixed_number(), "1 + 3/4")
 
         f = Fraction(8, 4)
         self.assertEqual(f.as_mixed_number(), "2")
