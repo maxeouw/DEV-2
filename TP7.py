@@ -12,31 +12,30 @@ class Fraction:
     def __init__(self, num=0, den=1):
         """This builds a fraction based on some numerator and denominator.
 
-        PRE : The denominator will not be equal to zero and the numerator is equal to at least zero.
         POST : The fraction is stored in its reduced form with a positive denominator.
+        RAISES : Sets an error if the denominator is zero
         """
         if den == 0:
             raise ValueError("Denominator cannot be zero.")
         common_divisor = gcd(num, den)
-        self._numerator = num // common_divisor
-        self._denominator = abs(den // common_divisor)
+        self.__numerator = num // common_divisor
+        self.__denominator = abs(den // common_divisor)
         if den < 0:
-            self._numerator = -self.numerator
+            self.__numerator = -self.__numerator
 
     @property
     def numerator(self):
-        return self._numerator
+        return self.__numerator
 
     @property
     def denominator(self):
-        return self._denominator
+        return self.__denominator
 
     # ------------------ Textual representations ------------------
 
     def __str__(self):
         """Return a textual representation of the reduced form of the fraction
 
-        PRE : None
         POST : Returns a string in the form "numerator/denominator" or "numerator" if the denominator is equal to 1.
         """
         if self.denominator == 1:
@@ -48,8 +47,7 @@ class Fraction:
 
         A mixed number is the sum of an integer and a proper fraction
 
-        PRE : None
-        POST : Returns a string in the form "integer proper_fraction" if the fraction is improper.
+        POST : Returns a string in the form "integer + proper_fraction" (or "integer" if the remainder equals zero) if the fraction is improper.
         """
         integer_part = self.numerator // self.denominator
         remainder = abs(self.numerator) % self.denominator
@@ -62,9 +60,11 @@ class Fraction:
     def __add__(self, other):
         """Overloading of the + operator for fractions
 
-        PRE : The other operand must be a fraction.
         POST : Returns a fraction representing a sum.
+        RAISES : raises an error if the other operand is not a Fraction
         """
+        if not isinstance(other, Fraction):
+            raise TypeError("The other operand must be a fraction")
         num = self.numerator * other.denominator + other.numerator * self.denominator
         den = self.denominator * other.denominator
         return Fraction(num, den)
@@ -72,9 +72,11 @@ class Fraction:
     def __sub__(self, other):
         """Overloading of the - operator for fractions
 
-        PRE : The other operand must be a fraction.
         POST : Returns a new Fraction representing the difference.
+        RAISES : raises an error if the other operand is not a Fraction
         """
+        if not isinstance(other, Fraction):
+            raise TypeError("The other operand must be a fraction")
         num = self.numerator * other.denominator - other.numerator * self.denominator
         den = self.denominator * other.denominator
         return Fraction(num, den)
@@ -82,9 +84,11 @@ class Fraction:
     def __mul__(self, other):
         """Overloading of the * operator for fractions
 
-        PRE : The other operand must be a fraction
         POST : Returns a new Fraction representing the product.
+        RAISES : raises an error if the other operand is not a Fraction
         """
+        if not isinstance(other, Fraction):
+            raise TypeError("The other operand must be a fraction")
         num = self.numerator * other.numerator
         den = self.denominator * other.denominator
         return Fraction(num, den)
@@ -92,9 +96,11 @@ class Fraction:
     def __truediv__(self, other):
         """Overloading of the / operator for fractions
 
-        PRE : The other operand must be a fraction and its numerator can not be equal to zero.
         POST : Returns a new Fraction representing the division.
+        RAISES : Raises a ZeroDivisionError if the other fraction has a numerator of 0.
         """
+        if not isinstance(other, Fraction):
+            raise TypeError("The other operand must be a fraction")
         if other.numerator == 0:
             raise ZeroDivisionError("Cannot divide by a fraction with a numerator of 0.")
         num = self.numerator * other.denominator
@@ -104,9 +110,11 @@ class Fraction:
     def __pow__(self, power):
         """Overloading of the ** operator for fractions
 
-        PRE : The exponent must be an integer.
         POST : Returns a new Fraction representing the power.
+        RAISES: raises an error if the power is not an integer.
         """
+        if not isinstance(power, int):
+            raise ValueError("The power must be an integer.")
         if power >= 0:
             return Fraction(self.numerator ** power, self.denominator ** power)
         return Fraction(self.denominator ** abs(power), self.numerator ** abs(power))
@@ -114,15 +122,14 @@ class Fraction:
     def __eq__(self, other):
         """Overloading of the == operator for fractions
 
-        PRE : The other operand must be a fraction
         POST : Returns True if the two fractions are equal.
+        RAISES : raises an error if the other operand is not a fraction
         """
         return self.numerator == other.numerator and self.denominator == other.denominator
 
     def __float__(self):
         """Returns the decimal value of the fraction
 
-        PRE : None
         POST : Returns the decimal value of the fraction.
         """
         return self.numerator / self.denominator
@@ -132,7 +139,6 @@ class Fraction:
     def is_zero(self):
         """Check if a fraction's value is 0
 
-        PRE : None
         POST : Verifies if the fraction's value is 0 by checking if the numerator is equal to 0.
         """
         return self.numerator == 0
@@ -140,7 +146,6 @@ class Fraction:
     def is_integer(self):
         """Check if a fraction is integer (ex : 8/4, 3, 2/2, ...)
 
-        PRE : None
         POST : Verifies if the rest of the division is equal to zero.
         """
         return self.numerator % self.denominator == 0
@@ -148,7 +153,6 @@ class Fraction:
     def is_proper(self):
         """Check if the absolute value of the fraction is < 1
 
-        PRE : None
         POST : Verifies if the absolute value of the numerator is smaller than the denominator.
         """
         return abs(self.numerator) < self.denominator
@@ -156,7 +160,6 @@ class Fraction:
     def is_unit(self):
         """Check if a fraction's numerator is 1 in its reduced form
 
-        PRE : None
         POST : Verifies if the numerator is equal to 1.
         """
         return self.numerator == 1
@@ -166,8 +169,8 @@ class Fraction:
 
         Two fractions are adjacents if the absolute value of the difference is a unit fraction
 
-        PRE : The other operand must be a fraction
         POST : Checks if  the numerator of the absolute value of the difference is equal to 1 and if its denominator is equal to zero
+        RAISES : raises an error if the other operand is not a fraction
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a Fraction.")
