@@ -49,12 +49,20 @@ class Fraction:
 
         POST : Returns a string in the form "integer + proper_fraction" (or "integer" if the remainder equals zero) if the fraction is improper.
         """
-        integer_part = self.numerator // self.denominator
-        remainder = abs(self.numerator) % self.denominator
-        if remainder == 0:
-            return str(integer_part)
-        return f"{integer_part} + {remainder}/{self.denominator}" if integer_part != 0 else f"{remainder}/{self.denominator}"
+        if self.numerator == 0:
+            return "0"  # Special case for zero
 
+        abs_numerator = abs(self.numerator)
+        integer_part = abs_numerator // self.denominator
+        remainder = abs_numerator % self.denominator
+
+        if remainder == 0:
+            return str(self.numerator // self.denominator)  # Whole number
+
+        sign = "-" if self.numerator < 0 else ""
+        if integer_part == 0:
+            return f"{sign}{remainder}/{self.denominator}"  # Proper fraction
+        return f"{sign}{integer_part} + {remainder}/{self.denominator}"  # Mixed number
     # ------------------ Operators overloading ------------------
 
     def __add__(self, other):

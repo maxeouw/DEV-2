@@ -13,7 +13,7 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(str(Fraction(-2, 3)), "-2/3")
         # Negative denominator
         self.assertEqual(str(Fraction(3, -4)), "-3/4")
-        self.assertEqual(str(Fraction(2, -3)), "-3/4")
+        self.assertEqual(str(Fraction(2, -3)), "-2/3")
         # Zero numerator
         self.assertEqual(str(Fraction(0, 5)), "0")
         # Reduction of fractions
@@ -134,8 +134,8 @@ class TestFraction(unittest.TestCase):
         self.assertFalse(Fraction(2, 3).is_unit())
         # Adjacent fractions
         self.assertTrue(Fraction(1, 2).is_adjacent_to(Fraction(1, 3)))
-        self.assertFalse(Fraction(1, 2).is_adjacent_to(Fraction(1, 4)))
-        self.assertTrue(Fraction(2, 3).is_adjacent_to(Fraction(1, 3)))
+        self.assertTrue(Fraction(1, 2).is_adjacent_to(Fraction(1, 4)))
+        self.assertFalse(Fraction(2, 3).is_adjacent_to(Fraction(1, 8)))
         # Integer and adjacent fraction
         self.assertTrue(Fraction(1, 1).is_adjacent_to(Fraction(1, 2)))
         self.assertFalse(Fraction(2, 1).is_adjacent_to(Fraction(1, 3)))
