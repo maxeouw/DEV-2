@@ -35,7 +35,7 @@ def main():
 
     # Comparison
     f5 = Fraction(3, 4)  # Equals to f1
-    print("\n=== Comparaison ===")
+    print("\n=== Comparison ===")
     print(f"f1 == f5 ? {f1 == f5}")
     print(f"f1 == f2 ? {f1 == f2}")
 
