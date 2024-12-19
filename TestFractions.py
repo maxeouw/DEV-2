@@ -140,5 +140,34 @@ class TestFraction(unittest.TestCase):
         self.assertTrue(Fraction(1, 1).is_adjacent_to(Fraction(1, 2)))
         self.assertFalse(Fraction(2, 1).is_adjacent_to(Fraction(1, 3)))
 
+    def test_initialization_zero_denominator(self):
+        with self.assertRaises(ValueError):
+            Fraction(1, 0)
+
+    def test_addition_with_invalid_operand(self):
+        with self.assertRaises(TypeError):
+            Fraction(1, 2) + 3  # Addition avec un entier
+
+    def test_subtraction_with_invalid_operand(self):
+        with self.assertRaises(TypeError):
+            Fraction(1, 2) - "1/2"  # Soustraction avec une chaîne
+
+    def test_multiplication_with_invalid_operand(self):
+        with self.assertRaises(TypeError):
+            Fraction(1, 2) * None  # Multiplication avec None
+
+    def test_division_with_invalid_operand(self):
+        with self.assertRaises(TypeError):
+            Fraction(1, 2) / [1, 2]  # Division avec une liste
+
+    def test_power_with_non_integer(self):
+        with self.assertRaises(ValueError):
+            Fraction(1, 2) ** 0.5  # Puissance non entière
+
+    def test_float_conversion(self):
+        self.assertEqual(float(Fraction(1, 2)), 0.5)
+        self.assertEqual(float(Fraction(3, 4)), 0.75)
+        self.assertEqual(float(Fraction(0, 1)), 0.0)
+
 if __name__ == "__main__":
     unittest.main()
