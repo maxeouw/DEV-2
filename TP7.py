@@ -13,7 +13,7 @@ class Fraction:
         """This builds a fraction based on some numerator and denominator.
         PRE: None
         POST : The fraction is stored in its reduced form with a positive denominator.
-        RAISES : Sets an error if the denominator is zero
+        RAISES ValueError: Sets an error if the denominator is zero
         """
         if den == 0:
             raise ValueError("Denominator cannot be zero.")
@@ -69,7 +69,7 @@ class Fraction:
         """Overloading of the + operator for fractions
         PRE: None
         POST : Returns a fraction representing a sum.
-        RAISES : raises an error if the other operand is not a Fraction
+        RAISES TypeError: raises an error if the other operand is not a Fraction
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a fraction")
@@ -81,7 +81,7 @@ class Fraction:
         """Overloading of the - operator for fractions
         PRE: None
         POST : Returns a new Fraction representing the difference.
-        RAISES : raises an error if the other operand is not a Fraction
+        RAISES TypeError: raises an error if the other operand is not a Fraction
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a fraction")
@@ -93,7 +93,7 @@ class Fraction:
         """Overloading of the * operator for fractions
         PRE: None
         POST : Returns a new Fraction representing the product.
-        RAISES : raises an error if the other operand is not a Fraction
+        RAISES TypeError: raises an error if the other operand is not a Fraction
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a fraction")
@@ -105,7 +105,7 @@ class Fraction:
         """Overloading of the / operator for fractions
         PRE: None
         POST : Returns a new Fraction representing the division.
-        RAISES : Raises a ZeroDivisionError if the other fraction has a numerator of 0.
+        RAISES ZeroDivisionError: Raises a ZeroDivisionError if the other fraction has a numerator of 0.
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a fraction")
@@ -119,7 +119,7 @@ class Fraction:
         """Overloading of the ** operator for fractions
         PRE: None
         POST : Returns a new Fraction representing the power.
-        RAISES: raises an error if the power is not an integer.
+        RAISES ValueError: raises an error if the power is not an integer.
         """
         if not isinstance(power, int):
             raise ValueError("The power must be an integer.")
@@ -178,7 +178,7 @@ class Fraction:
         Two fractions are adjacents if the absolute value of the difference is a unit fraction
         PRE: None
         POST : Checks if  the numerator of the absolute value of the difference is equal to 1 and if its denominator is equal to zero
-        RAISES : raises an error if the other operand is not a fraction
+        RAISES TypeError: raises an error if the other operand is not a fraction
         """
         if not isinstance(other, Fraction):
             raise TypeError("The other operand must be a Fraction.")
