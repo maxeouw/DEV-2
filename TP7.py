@@ -184,3 +184,4 @@ class Fraction:
             raise TypeError("The other operand must be a Fraction.")
         diff = self - other
         return diff.is_unit()
+
